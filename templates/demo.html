@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <script src="static/demo.js"></script>
+
+    <div id="demo">
+        <h1>Let's get started.</h1>
+        <form method="post">
+            <input id="demo-upload" type="file" class="form-control bg-dark" name="demo-img" accept="image/png, image/jpeg" required>
+            <input id="demo-submit" type="submit" class="btn" value="SUBMIT">
+        </form>
+    </div>
+{% endblock %}

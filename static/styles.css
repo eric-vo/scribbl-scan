@@ -4,9 +4,15 @@
 
 body {
     color: white;
-    padding: 10px;
     text-align: center;
     font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.navbar {
+    padding: 25px;
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
 }
 
 h1, .btn {
@@ -26,15 +32,17 @@ h1, .btn {
 }
 
 #try {
-    margin-top: 35px;
+    margin-bottom: 80px;
 }
 
 #description {
-    max-width: 600px;
+    width: 90%;
     margin: auto;
+    margin-bottom: 60px;
+    font-size: 14px;
 }
 
-#intro {
+#intro, #demo {
     width: 100%;
     margin: 0;
     position: absolute;
@@ -44,14 +52,14 @@ h1, .btn {
     padding: 10px;
 }
 
-#intro, nav {
+#intro, nav, #demo {
     animation-name: fade;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
 }
 
 #intro-img {
-    margin-bottom: 35px;
+    margin-bottom: 40px;
 }
 
 @keyframes fade {
@@ -62,4 +70,36 @@ h1, .btn {
     to {
         opacity: 1
     }
+}
+
+.nav-link:hover, .navbar-brand:hover {
+    filter: brightness(0.75);
+}
+
+#snap {
+    max-width: 500px;
+    width: 80%;
+}
+
+#easy {
+    max-width: 400px;
+    width: 64%;
+}
+
+#brand {
+    height: 45px;
+}
+
+#demo {
+    max-width: 500px;
+    width: 80%;
+}
+
+#demo-submit {
+    margin-top: 50px;
+}
+
+#demo-upload {
+    margin-top: 30px;
+    color: white;
 }
