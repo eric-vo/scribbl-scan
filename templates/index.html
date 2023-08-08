@@ -1,7 +1,14 @@
 {% extends 'layout.html' %}
 
-{% block body %}
-    <script src="static/index.js"></script>
+{% block head %}
+<title>{{ title }}</title>
+{% endblock %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
 
     <div id="intro">
         <div id="intro-img">
