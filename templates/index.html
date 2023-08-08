@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+    <script src="static/index.js"></script>
+
+    <div id="intro">
+        <!-- <h1>Scribble. Snap.</h1> -->
+        <div id="intro-img">
+            <img class="intro" src="static/intro.png" alt="Scribble. Snap" width="500">
+            <br><br>
+            <img class="intro" src="static/easy.png" alt="It's that easy." width="400">
+        </div>
+        
+        <p id="description">
+            <strong>
+                ScribblScan makes switching from pen and paper to digital a breeze.
+            </strong>
+            <br>
+            Digitize notes and documents in seconds or cite pages in an instant.
+        </p>
+        <button class="btn" id="try">TRY IT OUT</button>
+    </div>
+{% endblock %}
