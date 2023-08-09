@@ -1,13 +1,17 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-    <script src="static/demo.js"></script>
+    <script crossorigin="anonymous" src="https://kit.fontawesome.com/2b9aead10a.js"></script>
+    <script src="static/js/demo.js"></script>
 
-    <div id="demo">
+    <div class="fade" id="demo">
         <h1>Let's get started.</h1>
-        <form method="post">
-            <input id="demo-upload" type="file" class="form-control bg-dark" name="demo-img" accept="image/png, image/jpeg" required>
-            <input id="demo-submit" type="submit" class="btn" value="SUBMIT">
-        </form>
+        <canvas id="drawing-canvas" class="bg-dark" width="1200" height="250"></canvas>
+        <div id="icons">
+            <i class="fa-regular fa-trash-can" id="trash"></i>
+            <i class="fa-regular fa-circle-check" id="check"></i>
+        </div>
+        <h2 id="result">
+        <h2/>
     </div>
 {% endblock %}
