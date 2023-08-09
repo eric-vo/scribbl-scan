@@ -1,19 +1,19 @@
 {% extends 'layout.html' %}
 
 {% block body %}
-    <script src="static/index.js"></script>
+    <script src="static/js/index.js"></script>
 
-    <div id="intro">
+    <div class="fade" id="intro">
         <div id="intro-img">
-            <img class="intro" id="snap" src="static/intro.png" alt="Scribble. Snap.">
+            <img alt="Scribble. Snap." class="intro" id="snap" src="static/intro.png">
             <br><br>
-            <img class="intro" id="easy" src="static/easy.png" alt="It's that easy.">
+            <img alt="It's that easy." class="intro" id="easy" src="static/easy.png">
         </div>
 
         <button class="btn" id="try">TRY IT OUT</button>
         
         <p id="description">
-            Switching from pen and paper to digital is a breeze.
+            Digitize notes and documents with ease.
         </p>
     </div>
 {% endblock %}
