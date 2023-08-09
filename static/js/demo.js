@@ -46,6 +46,32 @@ document.addEventListener('DOMContentLoaded', () => {
         isDrawing = false;
     });
 
+    const upload = document.querySelector('#upload');
+    upload.onchange = () => {
+        const image_file = upload.files[0];
+        const image = new Image();
+        image.src = URL.createObjectURL(image_file);
+
+        image.onload = () => {
+            clearCanvas(canvas, context);
+
+            /* Draw the image on the canvas,
+            centered and scaled to fit the canvas */
+            const scaleMultiplier = 0.8;
+            const scale = Math.min(
+                canvas.width / image.width * scaleMultiplier,
+                canvas.height / image.height * scaleMultiplier,
+            );
+            const x = (canvas.width / 2) - (image.width / 2) * scale;
+            const y = (canvas.height / 2) - (image.height / 2) * scale;
+
+            // Put the image on the canvas
+            context.drawImage(
+                image, x, y, image.width * scale, image.height * scale
+            );
+        };
+    };
+
     document.querySelector('#check').onclick = () => {
         const result = document.querySelector('#result');
 
@@ -57,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Create a form with the image data
         const formData = new FormData();
         formData.append('image', image.src);
-        // console.log(image.src);
+        console.log(image.src);
 
         // Make an API call to the server
         fetch('/demo', {
@@ -72,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     document.querySelector('#trash').onclick = () => {
-        context.clearRect(0, 0, canvas.width, canvas.height);
+        clearCanvas(canvas, context);
     };
 });
 
@@ -127,6 +153,10 @@ function canvasToImage(canvas, context) {
     image.src = dataUrl;
 
     return image;
+}
+
+function clearCanvas(canvas, context) {
+    context.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function draw(context, fromX, fromY, toX, toY) {

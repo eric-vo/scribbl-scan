@@ -112,6 +112,12 @@ h1, .btn {
     margin-top: 20px;
 }
 
+#upload {
+    color: white;
+    margin-top: 20px;
+    width: 500px;
+}
+
 @keyframes fade {
     from {
         opacity: 0
