@@ -7,9 +7,9 @@ from PIL import Image
 from transformers import TrOCRProcessor, VisionEncoderDecoderModel
 
 # Load model
-processor = TrOCRProcessor.from_pretrained("microsoft/trocr-base-handwritten")
+processor = TrOCRProcessor.from_pretrained("microsoft/trocr-large-handwritten")
 model = VisionEncoderDecoderModel.from_pretrained(
-    "microsoft/trocr-base-handwritten"
+    "microsoft/trocr-large-handwritten"
 )
 
 # Blueprint configuration
