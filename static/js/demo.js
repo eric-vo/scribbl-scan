@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     canvas.addEventListener('mousemove', event => {
         if (!isDrawing) return;
-        
+
         // Draw a line from the last coordinates to the current coordinates
         draw(
             context,
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Create a form with the image data
         const formData = new FormData();
         formData.append('image', image.src);
-        console.log(image.src);
+        // console.log(image.src);
 
         // Make an API call to the server
         fetch('/demo', {

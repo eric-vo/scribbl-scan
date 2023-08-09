@@ -1,17 +1,23 @@
 {% extends 'layout.html' %}
 
-{% block body %}
-    <script crossorigin="anonymous" src="https://kit.fontawesome.com/2b9aead10a.js"></script>
-    <script src="static/js/demo.js"></script>
+{% block head %}
+    <script src="{{ url_for('static', filename='js/demo.js') }}"></script>
+    <title>Demo</title>
+{% endblock %}
 
+{% block body %}
     <div class="fade" id="demo">
         <h1>Let's get started.</h1>
-        <canvas id="drawing-canvas" class="bg-dark" width="1200" height="250"></canvas>
+
+        <canvas id="drawing-canvas" class="bg-dark" width="1200" height="250">
+        </canvas>
+
         <div id="icons">
             <i class="fa-regular fa-trash-can" id="trash"></i>
             <i class="fa-regular fa-circle-check" id="check"></i>
         </div>
+
         <h2 id="result">
-        <h2/>
+        </h2>
     </div>
 {% endblock %}
