@@ -117,6 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelector('#trash').onclick = () => {
         clearCanvas(canvas, context);
+        clearFile(upload);
     };
 });
 
@@ -187,6 +188,10 @@ function canvasToImage(canvas, context) {
 
 function clearCanvas(canvas, context) {
     context.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+function clearFile(fileUpload) {
+    fileUpload.value = '';
 }
 
 function draw(context, fromX, fromY, toX, toY) {
