@@ -3,10 +3,10 @@
 } */
 
 body {
-    color: white;
+    color      : white;
     font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    padding: 5px;
-    text-align: center;
+    padding    : 5px;
+    text-align : center;
 }
 
 h1,
@@ -27,10 +27,10 @@ h1,
 }
 
 .description {
-    font-size: 16px;
-    margin: auto;
+    font-size    : 16px;
+    margin       : auto;
     margin-bottom: 60px;
-    width: 90%;
+    width        : 90%;
 }
 
 .fa-regular {
@@ -48,7 +48,7 @@ h1,
 
 .navbar {
     padding: 25px;
-    width: 100%;
+    width  : 100%;
 }
 
 .navbar-brand:hover,
@@ -58,20 +58,20 @@ h1,
 
 .team-member {
     margin-bottom: 50px;
-    width: 400px;
+    width        : 400px;
 }
 
-.team-member > img {
+.team-member>img {
     border-radius: 10%;
     margin-bottom: 25px;
-    margin-top: 10px;
-    width: 150px;
+    margin-top   : 10px;
+    width        : 150px;
 }
 
-.team-member > p {
-    margin-left: auto;
+.team-member>p {
+    margin-left : auto;
     margin-right: auto;
-    width: 80%;
+    width       : 80%;
 }
 
 #brand {
@@ -90,12 +90,14 @@ h1,
     width        : 90%;
 }
 
-#about, #demo, #intro {
-    align-items: center;
-    display: flex;
+#about,
+#demo,
+#intro {
+    align-items   : center;
+    display       : flex;
     flex-direction: column;
-    padding-top: 100px;
-    width: 100%;
+    padding-top   : 100px;
+    width         : 100%;
 }
 
 #drawing-canvas {
@@ -111,7 +113,7 @@ h1,
 }
 
 #icons {
-    margin-top: 10px;
+    margin-top   : 10px;
     margin-bottom: 80px;
 }
 
@@ -120,7 +122,7 @@ h1,
 }
 
 #result {
-    font-size: 24px;
+    font-size    : 24px;
     margin-bottom: 80px;
 }
 
@@ -130,8 +132,8 @@ h1,
 }
 
 #team {
-    display: flex;
-    flex-wrap: wrap;
+    display        : flex;
+    flex-wrap      : wrap;
     justify-content: center;
 }
 
@@ -172,4 +174,8 @@ h1,
     border       : thin solid #212529;
     border-radius: 3px;
     margin-right : 15px;
+}
+
+.navbar-collapse {
+    flex-grow: unset;
 }
