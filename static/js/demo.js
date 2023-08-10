@@ -12,33 +12,37 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.addEventListener('mousedown', event => {
         isDrawing = true;
 
+        const { x: mouseXInCanvas, y: mouseYInCanvas } = getMousePositionInCanvas(canvas, event)
+
         // Draw a dot
-        updateLastCoordinates(event.offsetX, event.offsetY);
+        updateLastCoordinates(mouseXInCanvas, mouseYInCanvas);
         draw(
             context,
             lastCoordinates.x,
             lastCoordinates.y,
-            event.offsetX,
-            event.offsetY,
+            mouseXInCanvas,
+            mouseYInCanvas,
         );
     });
 
     canvas.addEventListener('mouseover', event => {
-        updateLastCoordinates(event.offsetX, event.offsetY);
+        const { x: mouseXInCanvas, y: mouseYInCanvas } = getMousePositionInCanvas(canvas, event)
+        updateLastCoordinates(mouseXInCanvas, mouseYInCanvas);
     });
 
     canvas.addEventListener('mousemove', event => {
         if (!isDrawing) return;
 
+        const { x: mouseXInCanvas, y: mouseYInCanvas } = getMousePositionInCanvas(canvas, event)
         // Draw a line from the last coordinates to the current coordinates
         draw(
             context,
             lastCoordinates.x,
             lastCoordinates.y,
-            event.offsetX,
-            event.offsetY,
+            mouseXInCanvas,
+            mouseYInCanvas,
         );
-        updateLastCoordinates(event.offsetX, event.offsetY);
+        updateLastCoordinates(mouseXInCanvas, mouseYInCanvas);
     });
 
     // Stop drawing when the mouse is released
@@ -90,17 +94,29 @@ document.addEventListener('DOMContentLoaded', () => {
             method: 'POST',
             body: formData
         })
-        .then(response => response.json())
-        .then(data => {
-            // Display the result
-            fadeInHtml(result, data.text);
-        });
+            .then(response => response.json())
+            .then(data => {
+                // Display the result
+                fadeInHtml(result, data.text);
+            });
     };
 
     document.querySelector('#trash').onclick = () => {
         clearCanvas(canvas, context);
     };
 });
+
+function getMousePositionInCanvas(canvas, event) {
+    const { clientX, clientY } = event
+    const { left, top, width, height } = canvas.getBoundingClientRect()
+    const scaleX = canvas.width / width
+    const scaleY = canvas.height / height
+
+    return {
+        x: (clientX - left) * scaleX,
+        y: (clientY - top) * scaleY
+    }
+}
 
 function canvasToImage(canvas, context) {
     // Get image data from canvas
@@ -175,5 +191,5 @@ function fadeInHtml(element, html) {
 }
 
 function updateLastCoordinates(x, y) {
-    lastCoordinates = {x: x, y: y}
+    lastCoordinates = { x: x, y: y }
 }
