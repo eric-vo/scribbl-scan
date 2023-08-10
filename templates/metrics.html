@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+
+{% block head %}
+    <title>About Us</title>
+{% endblock %}
+
+{% block body %}
+    <div class="fade" id="demo">
+        <h1>Technology and Metrics</h1>
+        <p>The core of our handwriting recognition technology is Microsoft's TrOCR, an encoder-decoder model that uses a vision Transformer as an encoder and a classic text Transformer as a decoder. Using a text Transformer as a decoder allows TrOCR to leverage an understanding of natural language in its transcriptions.</p>
+        <img alt="TrOCR architecture" src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/trocr_architecture.jpg" width="400px"></img>
+        <p>We fine-tune TrOCR on the IAM Handwriting Database to improve its performance on handwritten text. By training for 3 epochs using HuggingFace's Transformers library, we were able to achieve a character error rate of only 8.6%.</p>
+    </div>
+{% endblock %}

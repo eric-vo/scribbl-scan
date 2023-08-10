@@ -1,14 +1,18 @@
 import base64
 import io
+import torch
 import json
 
 from flask import Blueprint, render_template, request
 from PIL import Image
 from transformers import TrOCRProcessor, VisionEncoderDecoderModel
 
+device = "cuda:0" if torch.cuda.is_available() else "cpu"
+
 # Load model
 processor = TrOCRProcessor.from_pretrained("microsoft/trocr-base-handwritten")
 model = VisionEncoderDecoderModel.from_pretrained("ericvo/scribbl-scan-trocr")
+model.to(device)
 
 # Blueprint configuration
 # First argument is the blueprint's name
@@ -58,3 +62,7 @@ def demo():
 @home_bp.route("/about")
 def about():
     return render_template("about.html")
+
+@home_bp.route("/metrics")
+def metrics():
+    return render_template("metrics.html")
