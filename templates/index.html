@@ -8,9 +8,9 @@
 {% block body %}
     <div class="fade" id="intro">
         <div id="intro-img">
-            <img alt="Scribble. Snap." class="intro" id="snap" src="static/intro.png">
+            <img alt="Scribble. Snap." class="intro" id="snap" src="{{ url_for('static', filename='intro.png') }}">
             <br><br>
-            <img alt="It's that easy." class="intro" id="easy" src="static/easy.png">
+            <img alt="It's that easy." class="intro" id="easy" src="{{ url_for('static', filename='easy.png') }}">
         </div>
 
         <button class="btn" id="try">TRY IT OUT</button>
