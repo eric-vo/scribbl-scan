@@ -1,0 +1,102 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+    color: white;
+}
+
+header {
+    background-color: #35424a;
+    color: #ffffff;
+    text-align: center;
+    padding: 1rem;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    background-color: #35424a;
+    overflow: hidden;
+}
+
+nav li {
+    float: left;
+    margin: 0;
+}
+
+nav a {
+    display: block;
+    color: #ffffff;
+    text-align: center;
+    padding: 1rem;
+    text-decoration: none;
+}
+
+main {
+    padding: 2rem;
+}
+
+/* New styles for the About Me section */
+
+footer {
+    background-color: #08090a;
+    color: #ffffff;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+section {
+    text-align: center;
+}
+
+section h3 {
+    display: inline-block;
+    padding: 10px;
+    margin: 10px;
+    color: white;
+    width: 70%;
+    text-align: center;
+}
+
+section p {
+    display: inline-block;
+    padding: 10px;
+    margin: 10px;
+    color: white;
+    width: 70%;
+    text-align: center;
+    font-family: "Dancing Script", cursive; /* Set font to Dancing Script */
+}
+
+/* Additional styles for team members */
+#team-members {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+}
+
+.team-member {
+    text-align: center;
+    width: calc(33.33% - 20px); /* Adjust the width as needed */
+    padding: 1rem;
+    margin: 10px;
+    background-color: #000000;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: white;
+}
+
+.team-member img {
+    max-width: 100%;
+    border-radius: 50%;
+}
+
+/* Rest of your existing CSS styles */
+
