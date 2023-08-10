@@ -58,14 +58,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
         image.onload = () => {
             clearCanvas(canvas, context);
+            const imageMaxSpacePercentage = 0.8;
+            let scale = 1;
+            isWidthOfImageLarger = image.width > image.height
+            if (isWidthOfImageLarger) {
+                const maxWidthImageCanOccupy = canvas.width * imageMaxSpacePercentage
+                scale = maxWidthImageCanOccupy / image.width;
+            } else {
+                const maxHeightImageCanOccupy = canvas.height * imageMaxSpacePercentage
+                scale = maxHeightImageCanOccupy / image.height;
+            }
+
+            // image.width *= scale;
+            // image.height *= scale;
 
             /* Draw the image on the canvas,
             centered and scaled to fit the canvas */
-            const scaleMultiplier = 0.8;
-            const scale = Math.min(
-                canvas.width / image.width * scaleMultiplier,
-                canvas.height / image.height * scaleMultiplier,
-            );
+            // const scaleMultiplier = 0.8;
+            // const scale = Math.max(
+            //     (canvas.width - spaceAroundImage) / image.width * scaleMultiplier,
+            //     (canvas.height - spaceAroundImage) / image.height * scaleMultiplier,
+            // );
+
             const x = (canvas.width / 2) - (image.width / 2) * scale;
             const y = (canvas.height / 2) - (image.height / 2) * scale;
 
