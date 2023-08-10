@@ -7,7 +7,7 @@ from PIL import Image
 from transformers import TrOCRProcessor, VisionEncoderDecoderModel
 
 # Load model
-processor = TrOCRProcessor.from_pretrained("microsoft/trocr-large-handwritten")
+processor = TrOCRProcessor.from_pretrained("microsoft/trocr-base-handwritten")
 model = VisionEncoderDecoderModel.from_pretrained("ericvo/scribbl-scan-trocr")
 
 # Blueprint configuration
