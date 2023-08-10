@@ -8,9 +8,7 @@ from transformers import TrOCRProcessor, VisionEncoderDecoderModel
 
 # Load model
 processor = TrOCRProcessor.from_pretrained("microsoft/trocr-large-handwritten")
-model = VisionEncoderDecoderModel.from_pretrained(
-    "microsoft/trocr-large-handwritten"
-)
+model = VisionEncoderDecoderModel.from_pretrained("ericvo/scribbl-scan-trocr")
 
 # Blueprint configuration
 # First argument is the blueprint's name
