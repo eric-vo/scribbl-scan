@@ -44,14 +44,18 @@ h1, .btn {
     animation-name: fade;
 }
 
+.metrics-description {
+    margin-top: 20px;
+    max-width: 800px;
+    width: 80%;
+}
 
 .navbar {
     padding: 25px;
     width: 100%;
 }
 
-.navbar-brand:hover,
-.nav-link:hover {
+.navbar-brand:hover, .nav-link:hover {
     filter: brightness(0.75);
 }
 
@@ -85,15 +89,15 @@ h1, .btn {
 #description {
     font-size: 16px;
     margin: auto;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
     width: 90%;
 }
 
-#about, #demo, #intro {
+#about, #demo, #intro, #metrics {
     align-items: center;
     display: flex;
     flex-direction: column;
-    padding-top: 10px;
+    padding-top: 20px;
     width: 100%;
 }
 
@@ -118,9 +122,20 @@ h1, .btn {
     margin-bottom: 40px;
 }
 
+#metrics-bottom {
+    margin-bottom: 60px;
+}
+
+#model-img {
+    margin-bottom: 40px;
+    margin-top: 40px;
+    max-width: 600px;
+    width: 80%;
+}
+
 #result {
     font-size: 24px;
-    margin-bottom: 60px;
+    margin-bottom: 80px;
 }
 
 #snap {
@@ -156,6 +171,14 @@ h1, .btn {
     width: 80%;
 }
 
+#upload::file-selector-button {
+    padding: 0.5em 0.75em;
+    border: thin solid #212529;
+    border-radius: 3px;
+    margin-right: 15px;
+}
+
+
 @keyframes fade {
     from {
         opacity: 0
@@ -166,9 +189,8 @@ h1, .btn {
     }
 }
 
-#upload::file-selector-button {
-    padding: 0.5em 0.75em;
-    border: thin solid #212529;
-    border-radius: 3px;
-    margin-right: 15px;
+@media screen and (max-width: 800px) {
+    #error-rate {
+        margin-top: 20px;
+    }
 }

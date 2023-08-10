@@ -1,14 +1,26 @@
 {% extends 'layout.html' %}
 
 {% block head %}
-    <title>About Us</title>
+    <title>Tech & Metrics - ScribblScan</title>
 {% endblock %}
 
 {% block body %}
-    <div class="fade" id="demo">
-        <h1>Technology and Metrics</h1>
-        <p>The core of our handwriting recognition technology is Microsoft's TrOCR, an encoder-decoder model that uses a vision Transformer as an encoder and a classic text Transformer as a decoder. Using a text Transformer as a decoder allows TrOCR to leverage an understanding of natural language in its transcriptions.</p>
-        <img alt="TrOCR architecture" src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/trocr_architecture.jpg" width="400px"></img>
-        <p>We fine-tune TrOCR on the IAM Handwriting Database to improve its performance on handwritten text. By training for 3 epochs using HuggingFace's Transformers library, we were able to achieve a character error rate of only 8.6%.</p>
+    <div class="fade" id="metrics">
+        <h1>Technology & Metrics</h1>
+        <div class="metrics-description">
+            Our model is based off of <a href="https://huggingface.co/microsoft/trocr-base-handwritten">Microsoft's TrOCR</a>,
+            an encoder-decoder model with a vision transformer encoder and a classic text transformer decoder.
+        </div>
+
+        <img alt="TrOCR architecture" id="model-img" src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/trocr_architecture.jpg">
+
+        <br><br>
+        <div class="metrics-description" id="metrics-bottom">
+            We fine-tuned our model on the <a href="https://fki.tic.heia-fr.ch/databases/iam-handwriting-database">IAM Handwriting Database</a> to improve its performance on handwritten text.
+            <div id="error-rate">
+                With a training length of <strong>3 epochs</strong>,
+                we were able to reduce our character error rate to <strong>8.6%</strong>.
+            </div>
+        </div>
     </div>
 {% endblock %}
