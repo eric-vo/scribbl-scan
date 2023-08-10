@@ -5,6 +5,7 @@
 body {
     color: white;
     font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    padding: 5px;
     text-align: center;
 }
 
@@ -22,6 +23,13 @@ h1, .btn {
 
 .btn:hover {
     background-color: #558985;
+}
+
+.description {
+    font-size: 16px;
+    margin: auto;
+    margin-bottom: 60px;
+    width: 90%;
 }
 
 .fa-regular {
@@ -79,13 +87,6 @@ h1, .btn {
     flex-direction: column;
     padding-top: 2vh;
     width: 100%;
-}
-
-#description {
-    font-size: 16px;
-    margin: auto;
-    margin-bottom: 60px;
-    width: 90%;
 }
 
 #drawing-canvas {
