@@ -39,13 +39,29 @@ h1, .btn {
 
 .navbar {
     padding: 25px;
-    position: fixed;
     width: 100%;
-    z-index: 9999;
 }
 
 .navbar-brand:hover, .nav-link:hover {
     filter: brightness(0.75);
+}
+
+.team-member {
+    margin-bottom: 50px;
+    width: 400px;
+}
+
+.team-member > img {
+    border-radius: 10%;
+    margin-bottom: 25px;
+    margin-top: 10px;
+    width: 150px;
+}
+
+.team-member > p {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
 }
 
 #brand {
@@ -57,18 +73,11 @@ h1, .btn {
     cursor: pointer;
 }
 
-#demo {
-    max-width: 1500px;
-    width: 80%;
-}
-
-#demo, #intro {
-    left: 50%;
-    margin: 0;
-    padding: 10px;
-    position: absolute;
-    top: 50%;
-    transform: translate(-50%, -50%);
+#about, #demo, #intro {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 5vh;
     width: 100%;
 }
 
@@ -90,6 +99,7 @@ h1, .btn {
 }
 
 #icons {
+    margin-top: 10px;
     margin-bottom: 80px;
 }
 
@@ -97,9 +107,20 @@ h1, .btn {
     margin-bottom: 40px;
 }
 
+#result {
+    font-size: 24px;
+    margin-bottom: 80px;
+}
+
 #snap {
     max-width: 500px;
     width: 80%;
+}
+
+#team {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 #trash:hover {
@@ -113,8 +134,9 @@ h1, .btn {
 }
 
 #upload {
+    border-radius: 5px;
     color: white;
-    margin-top: 40px;
+    margin-top: 20px;
     width: 500px;
 }
 
