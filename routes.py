@@ -86,7 +86,7 @@ def line_segmentation(image):
                 if (
                     std_dev(section_crop) < std_dev(image) * 0.7
                     and i != 1
-                    and len(new_changes_indices) > 1
+                    and len(new_changes_indices) > 0
                 ):
                     new_changes_indices[-1] = (
                         curHeight * 0.35 + lastHeight * 0.65
@@ -99,7 +99,7 @@ def line_segmentation(image):
     changes_indices = np.rint(
         np.array(changes_indices) / LINE_SEGMENTATION_SCALE_FACTOR
     )
-    # show_image_with_horizontal_lines(og_image, changes_indices)
+    #show_image_with_horizontal_lines(og_image, changes_indices)
     return changes_indices.tolist()
 
 
@@ -157,10 +157,9 @@ def demo():
             if np.mean(binarized_array) < 0.5:
                 image = ImageOps.invert(image)
                 print("Inverted image")
-            threshold = np.median(img_arr) * 0.2 + np.average(img_arr) * 0.8
-            contrast_applied_array = (np.exp( (img_arr - threshold) * -5 * (1/255) ) + 1)**-1
-
-            image = Image.fromarray((contrast_applied_array * 255).astype(np.uint8))
+            #threshold = np.median(img_arr) * 0.2 + np.average(img_arr) * 0.8
+            #contrast_applied_array = (np.exp( (img_arr - threshold) * -1 * (1/255) ) + 1)**-1
+            #image = Image.fromarray((contrast_applied_array * 255).astype(np.uint8))
 
             # Get line segmentation (ewww I use opencv here ewwww)
             cv2_image = np.array(image.convert("L"))
