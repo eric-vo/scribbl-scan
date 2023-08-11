@@ -55,6 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.querySelector('#camera-icon').onclick = () => {
+        clearCanvas(canvas, context);
+        clearFile(upload);
         webcam.start();
         camOn = true;
     };
@@ -223,26 +225,53 @@ function fadeInHtml(element, html) {
     element.innerHTML = html;
 }
 
-function scaleImageRelativeCanvas(canvas, image) {
-    const imageMaxSpacePercentage = 0.8;
-    let scale = 1;
-    isWidthOfImageLarger = image.width > image.height
-    if (isWidthOfImageLarger) {
-        const maxWidthImageCanOccupy = canvas.width * imageMaxSpacePercentage
-        scale = maxWidthImageCanOccupy / image.width;
+function getPaddingFactor(aspectRatio) {
+    if (aspectRatio > 10) {
+        return 0.9
+    } else if (aspectRatio > 5) {
+        return 0.8
+    } else if (aspectRatio > 2) {
+        return 0.6
     } else {
-        const maxHeightImageCanOccupy = canvas.height * imageMaxSpacePercentage
-        scale = maxHeightImageCanOccupy / image.height;
+        return 0.5
+    }
+}
+
+function scaleImageRelativeCanvas(canvas, image) {
+    // const imageMaxSpacePercentage = 0.8;
+    // let scale = 1;
+    // isWidthOfImageLarger = image.width > image.height
+    // if (isWidthOfImageLarger) {
+    //     const maxWidthImageCanOccupy = canvas.width * imageMaxSpacePercentage
+    //     scale = maxWidthImageCanOccupy / image.width;
+    // } else {
+    //     const maxHeightImageCanOccupy = canvas.height * imageMaxSpacePercentage
+    //     scale = maxHeightImageCanOccupy / image.height;
+    // }
+
+    // const x = (canvas.width / 2) - (image.width / 2) * scale;
+    // const y = (canvas.height / 2) - (image.height / 2) * scale;
+
+    const aspectRatio = image.width / image.height;
+    const paddingFactor = getPaddingFactor(aspectRatio);
+
+    let width = canvas.width * paddingFactor;
+    let height = canvas.height * paddingFactor;
+
+    if (aspectRatio > 1) {
+        height = width / aspectRatio;
+    } else {
+        width = height * aspectRatio;
     }
 
-    const x = (canvas.width / 2) - (image.width / 2) * scale;
-    const y = (canvas.height / 2) - (image.height / 2) * scale;
+    const x = (canvas.width - width) / 2;
+    const y = (canvas.height - height) / 2;
 
     return {
         x: x,
         y: y,
-        width: image.width * scale,
-        height: image.height * scale
+        width: width,
+        height: height,
     }
 }
 
