@@ -1,7 +1,7 @@
 let isDrawing = false;
 let lastCoordinates;
 let camOn = false;
-const maxPaddingPx = 35;
+const maxPaddingPx = 0; //35;
 
 document.addEventListener('DOMContentLoaded', () => {
     // Set up the canvas

@@ -4,6 +4,7 @@ import torch
 import json
 import cv2 # Sorry I'm mixing PIL and OpenCV in the same project :(
 import numpy as np
+import matplotlib.pyplot as plt
 
 from flask import Blueprint, render_template, request
 from PIL import Image, ImageOps
@@ -12,13 +13,28 @@ from transformers import TrOCRProcessor, VisionEncoderDecoderModel
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
 print(device)
 
+def show_image_with_horizontal_lines(image, line_heights):
+    # Read the image
+    # Convert to RGB color format for Matplotlib
+    image_rgb = cv2.cvtColor(image, cv2.COLOR_GRAY2RGB)
+
+    # Show the image
+    plt.imshow(image_rgb)
+
+    # Add horizontal lines at specified heights
+    for height in line_heights:
+        plt.axhline(y=height, color='r', linewidth=2)
+
+    plt.title('Image with Horizontal Lines')
+    plt.show()
+
 def std_dev(arr):
     if len(arr) == 0:
         raise ValueError("Input array must not be empty")
     mean = np.mean(arr)
-    squared_diff = np.square(arr - mean)
+    squared_diff = np.abs(arr - mean)
     variance = np.mean(squared_diff)
-    std_dev = np.sqrt(variance)
+    std_dev = variance #np.sqrt(variance)
     return std_dev
 
 LINE_SEGMENTATION_SCALE_FACTOR = 0.1
@@ -37,7 +53,7 @@ def line_segmentation(image):
     new_changes_indices = []
     if len(changes_indices) > 2:
         lastHeight = changes_indices[0]
-        i = 1
+        i = 0
         while True:
             i += 1
             if i >= len(changes_indices):
@@ -45,12 +61,16 @@ def line_segmentation(image):
             curHeight = changes_indices[i]
             space = curHeight - lastHeight
             section_crop = image[lastHeight:curHeight, :]
-            if not (space < np.mean(spacings) * 0.65 or std_dev(section_crop) < std_dev(image) * 0.65) :
-                new_changes_indices.append(curHeight)
+            if not space < np.mean(spacings) * 0.4:
+                if (std_dev(section_crop) < std_dev(image) * 0.7 and i != 1) :
+                    new_changes_indices[-1] = curHeight * 0.35 + lastHeight * 0.65           
+                else:
+                    new_changes_indices.append(curHeight)
             lastHeight = curHeight
 
     changes_indices = new_changes_indices
     changes_indices = np.rint(np.array(changes_indices) / LINE_SEGMENTATION_SCALE_FACTOR)
+    #show_image_with_horizontal_lines(og_image, changes_indices)
     return changes_indices.tolist()
 
 # Load model
@@ -98,8 +118,8 @@ def demo():
         ).convert("RGB")
         img_arr = np.array(image)
         threshold = np.median(img_arr) * 0.2 + np.average(img_arr) * 0.8
-        binarized_array = np.where(img_arr >= threshold, 1, 0).tolist()
-        if np.mean(np.array(binarized_array)) < 0.5:
+        binarized_array = np.where(img_arr >= threshold, 1, 0)
+        if np.mean(binarized_array) < 0.5:
             image = ImageOps.invert(image)
             print("Inverted image")
 
@@ -109,14 +129,11 @@ def demo():
         split_points = line_segmentation(cv2_image)
         split_points.append(image.height - 1)
 
-        last_crop_height = 0
         out_text = ""
-        crop_expansion_factor = 0.1/(len(split_points)) # expansion size is smaller if there are more lines
-        for height in split_points:
-            cropped_image = image.crop((0, int(max(last_crop_height - image.height * crop_expansion_factor, 0)),
-                image.width, int(min(height + image.height * crop_expansion_factor, image.height))));
-            if std_dev(np.array(cropped_image)) > std_dev(np.array(image)) * 0.9:
-                out_text += infer_on_img(cropped_image) + "\n"
+        last_crop_height = 0
+        for i, height in enumerate(split_points):
+            cropped_image = image.crop((0, int(last_crop_height), image.width, int(height)));
+            out_text += infer_on_img(cropped_image) + "\n"
             last_crop_height = height
 
         
