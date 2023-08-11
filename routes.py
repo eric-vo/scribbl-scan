@@ -1,8 +1,8 @@
 import base64
 import io
-import torch
 import json
 
+import torch
 from flask import Blueprint, render_template, request
 from PIL import Image
 from transformers import TrOCRProcessor, VisionEncoderDecoderModel
@@ -62,6 +62,7 @@ def demo():
 @home_bp.route("/about")
 def about():
     return render_template("about.html")
+
 
 @home_bp.route("/metrics")
 def metrics():
