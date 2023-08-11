@@ -2,12 +2,56 @@ import base64
 import io
 import torch
 import json
+import cv2 # Sorry I'm mixing PIL and OpenCV in the same project :(
+import numpy as np
 
 from flask import Blueprint, render_template, request
-from PIL import Image
+from PIL import Image, ImageOps
 from transformers import TrOCRProcessor, VisionEncoderDecoderModel
 
 device = "cuda:0" if torch.cuda.is_available() else "cpu"
+print(device)
+
+def std_dev(arr):
+    if len(arr) == 0:
+        raise ValueError("Input array must not be empty")
+    mean = np.mean(arr)
+    squared_diff = np.square(arr - mean)
+    variance = np.mean(squared_diff)
+    std_dev = np.sqrt(variance)
+    return std_dev
+
+LINE_SEGMENTATION_SCALE_FACTOR = 0.1
+def line_segmentation(image):
+    og_image = image
+    image = cv2.resize(image, (int(og_image.shape[1] * LINE_SEGMENTATION_SCALE_FACTOR), int(og_image.shape[0] * LINE_SEGMENTATION_SCALE_FACTOR)), interpolation=cv2.INTER_AREA)
+    brightness_array = np.mean(image, axis=1)
+    threshold = np.median(brightness_array) * 0.2 + np.average(brightness_array) * 0.8
+    binarized_array = np.where(brightness_array >= threshold, 1, 0).tolist()
+    changes_indices = []
+    for i in range(1, len(binarized_array)): # tried doing a smart numpy thing here and it didn't work for some reason so uhhhh dumb solution ig
+        if binarized_array[i] != binarized_array[i - 1]:
+            changes_indices.append(i)
+
+    spacings = np.array([changes_indices[i] - (0 if i == 0 else changes_indices[i - 1]) for i in range(0, len(changes_indices)) ])
+    new_changes_indices = []
+    if len(changes_indices) > 2:
+        lastHeight = changes_indices[0]
+        i = 1
+        while True:
+            i += 1
+            if i >= len(changes_indices):
+                break
+            curHeight = changes_indices[i]
+            space = curHeight - lastHeight
+            section_crop = image[lastHeight:curHeight, :]
+            if not (space < np.mean(spacings) * 0.65 or std_dev(section_crop) < std_dev(image) * 0.65) :
+                new_changes_indices.append(curHeight)
+            lastHeight = curHeight
+
+    changes_indices = new_changes_indices
+    changes_indices = np.rint(np.array(changes_indices) / LINE_SEGMENTATION_SCALE_FACTOR)
+    return changes_indices.tolist()
 
 # Load model
 processor = TrOCRProcessor.from_pretrained("microsoft/trocr-base-handwritten")
@@ -34,6 +78,14 @@ def index():
         "index.html", data=login, title="ScribblScan", subtitle="ScribblScan"
     )
 
+def infer_on_img(image):
+    pixel_values = processor(image, return_tensors="pt").pixel_values
+    pixel_values = pixel_values.to(device)
+    generated_ids = model.generate(pixel_values)
+    generated_text = processor.batch_decode(
+        generated_ids, skip_special_tokens=True
+    )[0]
+    return generated_text
 
 @home_bp.route("/demo", methods=["GET", "POST"])
 def demo():
@@ -44,16 +96,32 @@ def demo():
         image = Image.open(
             io.BytesIO(base64.b64decode(image_data_url.split(",")[1]))
         ).convert("RGB")
+        img_arr = np.array(image)
+        threshold = np.median(img_arr) * 0.2 + np.average(img_arr) * 0.8
+        binarized_array = np.where(img_arr >= threshold, 1, 0).tolist()
+        if np.mean(np.array(binarized_array)) < 0.5:
+            image = ImageOps.invert(image)
+            print("Inverted image")
 
-        # Get text from image
-        pixel_values = processor(image, return_tensors="pt").pixel_values
-        generated_ids = model.generate(pixel_values)
-        generated_text = processor.batch_decode(
-            generated_ids, skip_special_tokens=True
-        )[0]
 
+        # Get line segmentation (ewww I use opencv here ewwww)
+        cv2_image = np.array(image.convert("L"))
+        split_points = line_segmentation(cv2_image)
+        split_points.append(image.height - 1)
+
+        last_crop_height = 0
+        out_text = ""
+        crop_expansion_factor = 0.1/(len(split_points)) # expansion size is smaller if there are more lines
+        for height in split_points:
+            cropped_image = image.crop((0, int(max(last_crop_height - image.height * crop_expansion_factor, 0)),
+                image.width, int(min(height + image.height * crop_expansion_factor, image.height))));
+            if std_dev(np.array(cropped_image)) > std_dev(np.array(image)) * 0.9:
+                out_text += infer_on_img(cropped_image) + "\n"
+            last_crop_height = height
+
+        
         # Return text
-        return json.dumps({"text": generated_text})
+        return json.dumps({"text": out_text})
 
     # Render demo page
     return render_template("demo.html")
