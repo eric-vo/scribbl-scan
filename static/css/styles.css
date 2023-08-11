@@ -67,6 +67,10 @@ video {
     filter: brightness(0.75);
 }
 
+.navbar-collapse {
+    flex-grow: unset;
+}
+
 .primary-box {
     align-items: center;
     display: flex;
