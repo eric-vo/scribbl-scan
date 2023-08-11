@@ -1,17 +1,25 @@
 let isDrawing = false;
 let lastCoordinates;
 let camOn = false;
+const maxPaddingPx = 35;
 
 document.addEventListener('DOMContentLoaded', () => {
     // Set up the canvas
     const canvas = document.getElementById('drawing-canvas');
     const context = canvas.getContext('2d');
-    context.lineCap = 'round';
-    context.lineWidth = 3;
-    context.strokeStyle = 'white';
+
+    initializeCanvas(canvas, context);
 
     const webcamVideo = document.querySelector('#webcam');
     const webcam = new Webcam(webcamVideo, 'user');
+
+    const upload = document.querySelector('#upload');
+    clearFile(upload);
+
+    window.onresize = () => {
+        initializeCanvas(canvas, context);
+        clearFile(upload);
+    };
 
     canvas.addEventListener('mousedown', event => {
         isDrawing = true;
@@ -57,12 +65,14 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('#camera-icon').onclick = () => {
         clearCanvas(canvas, context);
         clearFile(upload);
-        webcam.start();
-        camOn = true;
+        if (!camOn) {
+            webcam.start();
+            camOn = true;
+        }
     };
 
     webcamVideo.addEventListener('play', () => {
-        const dimensions = scaleImageRelativeCanvas(canvas, webcamVideo);
+        const dimensions = resizeImageToCanvas(canvas, webcamVideo);
         drawVideo(
             context,
             webcamVideo,
@@ -73,15 +83,10 @@ document.addEventListener('DOMContentLoaded', () => {
         );
     });
 
-    function drawVideo(context, video, x, y, width, height) {
-        context.drawImage(video, x, y, width, height);
-        if (camOn) {
-            setTimeout(drawVideo, 10, context, video, x, y, width, height);
-        }
-    }
-
-    const upload = document.querySelector('#upload');
     upload.onchange = () => {
+        camOn = false;
+        webcam.stop();
+
         const image_file = upload.files[0];
         const image = new Image();
         image.src = URL.createObjectURL(image_file);
@@ -89,7 +94,7 @@ document.addEventListener('DOMContentLoaded', () => {
         image.onload = () => {
             clearCanvas(canvas, context);
 
-            const dimensions = scaleImageRelativeCanvas(canvas, image);
+            const dimensions = resizeImageToCanvas(canvas, image);
 
             // Put the image on the canvas
             context.drawImage(
@@ -141,15 +146,12 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function getMousePositionInCanvas(canvas, event) {
-    const { clientX, clientY } = event
-    const { left, top, width, height } = canvas.getBoundingClientRect()
+    const {clientX, clientY} = event
+    const {left, top, width, height}  = canvas.getBoundingClientRect()
     const scaleX = canvas.width / width
     const scaleY = canvas.height / height
 
-    return {
-        x: (clientX - left) * scaleX,
-        y: (clientY - top) * scaleY
-    }
+    return {x: (clientX - left) * scaleX, y: (clientY - top) * scaleY}
 }
 
 function canvasToImage(canvas, context) {
@@ -218,6 +220,13 @@ function draw(context, fromX, fromY, toX, toY) {
     context.stroke();
 }
 
+function drawVideo(context, video, x, y, width, height) {
+    context.drawImage(video, x, y, width, height);
+    if (camOn) {
+        setTimeout(drawVideo, 10, context, video, x, y, width, height);
+    }
+}
+
 function fadeInHtml(element, html) {
     element.classList.remove('fade');
     element.offsetHeight;
@@ -225,54 +234,34 @@ function fadeInHtml(element, html) {
     element.innerHTML = html;
 }
 
-function getPaddingFactor(aspectRatio) {
-    if (aspectRatio > 10) {
-        return 0.9
-    } else if (aspectRatio > 5) {
-        return 0.8
-    } else if (aspectRatio > 2) {
-        return 0.6
-    } else {
-        return 0.5
-    }
+function initializeCanvas(canvas, context) {
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+    context.lineCap = 'round';
+    context.lineWidth = 3;
+    context.strokeStyle = 'white';
 }
 
-function scaleImageRelativeCanvas(canvas, image) {
-    // const imageMaxSpacePercentage = 0.8;
-    // let scale = 1;
-    // isWidthOfImageLarger = image.width > image.height
-    // if (isWidthOfImageLarger) {
-    //     const maxWidthImageCanOccupy = canvas.width * imageMaxSpacePercentage
-    //     scale = maxWidthImageCanOccupy / image.width;
-    // } else {
-    //     const maxHeightImageCanOccupy = canvas.height * imageMaxSpacePercentage
-    //     scale = maxHeightImageCanOccupy / image.height;
-    // }
-
-    // const x = (canvas.width / 2) - (image.width / 2) * scale;
-    // const y = (canvas.height / 2) - (image.height / 2) * scale;
-
+function resizeImageToCanvas(canvas, image) {
+    /* Resize the image and calculate the x and y position
+    to fit in the canvas within the max padding */
     const aspectRatio = image.width / image.height;
-    const paddingFactor = getPaddingFactor(aspectRatio);
 
-    let width = canvas.width * paddingFactor;
-    let height = canvas.height * paddingFactor;
+    const diffWidthRatio = image.width / canvas.width;
+    const diffHeightRatio = image.height / canvas.height;
 
-    if (aspectRatio > 1) {
+    if (diffWidthRatio >= diffHeightRatio) {
+        width = canvas.width - maxPaddingPx * 2;
         height = width / aspectRatio;
     } else {
+        height = canvas.height - maxPaddingPx * 2;
         width = height * aspectRatio;
     }
 
     const x = (canvas.width - width) / 2;
     const y = (canvas.height - height) / 2;
 
-    return {
-        x: x,
-        y: y,
-        width: width,
-        height: height,
-    }
+    return {x: x, y: y, width: width, height: height}
 }
 
 function updateLastCoordinates(x, y) {
