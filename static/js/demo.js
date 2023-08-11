@@ -1,7 +1,7 @@
 let isDrawing = false;
 let lastCoordinates;
 let camOn = false;
-const maxPaddingPx = 0; //35;
+const maxPaddingPx = 0; // 35;
 
 document.addEventListener('DOMContentLoaded', () => {
     // Set up the canvas
@@ -123,9 +123,12 @@ document.addEventListener('DOMContentLoaded', () => {
         // Convert the canvas to an image
         const imageUrl = canvasToImageUrl(canvas, context);
 
+        const multipleLinesCheckbox = document.querySelector('#multiple-lines');
+
         // Create a form with the image data
         const formData = new FormData();
         formData.append('image', imageUrl);
+        formData.append('multiple_lines', multipleLinesCheckbox.checked);
         console.log(imageUrl);
 
         // Make an API call to the server
