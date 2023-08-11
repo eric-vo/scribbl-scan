@@ -86,7 +86,7 @@ def line_segmentation(image):
                 if (
                     std_dev(section_crop) < std_dev(image) * 0.7
                     and i != 1
-                    and new_changes_indices
+                    and len(new_changes_indices) > 1
                 ):
                     new_changes_indices[-1] = (
                         curHeight * 0.35 + lastHeight * 0.65
@@ -148,14 +148,19 @@ def demo():
         image = Image.open(
             io.BytesIO(base64.b64decode(image_data_url.split(",")[1]))
         ).convert("RGB")
-        img_arr = np.array(image)
 
         if request.form.get("multiple_lines") == "true":
+            img_arr = np.array(image)
             threshold = np.median(img_arr) * 0.2 + np.average(img_arr) * 0.8
             binarized_array = np.where(img_arr >= threshold, 1, 0)
+
             if np.mean(binarized_array) < 0.5:
                 image = ImageOps.invert(image)
                 print("Inverted image")
+            threshold = np.median(img_arr) * 0.2 + np.average(img_arr) * 0.8
+            contrast_applied_array = (np.exp( (img_arr - threshold) * -5 * (1/255) ) + 1)**-1
+
+            image = Image.fromarray((contrast_applied_array * 255).astype(np.uint8))
 
             # Get line segmentation (ewww I use opencv here ewwww)
             cv2_image = np.array(image.convert("L"))
@@ -166,6 +171,7 @@ def demo():
 
         out_text = ""
         last_crop_height = 0
+
         for height in split_points:
             cropped_image = image.crop(
                 (0, int(last_crop_height), image.width, int(height))
