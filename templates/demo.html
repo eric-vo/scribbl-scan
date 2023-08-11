@@ -2,6 +2,7 @@
 
 {% block head %}
     <script src="{{ url_for('static', filename='js/demo.js') }}"></script>
+    <script src="https://unpkg.com/webcam-easy@1.1.1/dist/webcam-easy.min.js"></script>
     <title>Demo - ScribblScan</title>
 {% endblock %}
 
@@ -9,7 +10,13 @@
     <div class="fade" id="demo">
         <h1>Start drawing or upload a file.</h1>
 
-        <input accept="image/png, image/jpeg" class="bg-dark" id="upload" type="file">
+        <video autoplay id="webcam" playsinline>
+        </video>
+
+        <div id="image-bar">
+            <i class="fa-solid fa-camera" id="camera-icon"></i>
+            <input accept="image/png, image/jpeg" class="bg-dark" id="upload" type="file">
+        </div>
 
         <canvas id="drawing-canvas" class="bg-dark" width="1200" height="350">
         </canvas>

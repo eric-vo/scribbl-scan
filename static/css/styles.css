@@ -13,6 +13,10 @@ h1, .btn {
     width: 80%;
 }
 
+video {
+    display: none;
+}
+
 .btn {
     background-color: #64a19d;
     color: white;
@@ -28,7 +32,7 @@ h1, .btn {
 .description {
     font-size    : 16px;
     margin       : auto;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     width        : 90%;
 }
 
@@ -71,26 +75,33 @@ h1, .btn {
     width        : 150px;
 }
 
-.team-member>p {
+.team-member > p {
     margin-left : auto;
     margin-right: auto;
     width       : 80%;
+}
+
+#bottom-description {
+    margin-bottom: 60px;
 }
 
 #brand {
     height: 45px;
 }
 
+#camera-icon {
+    cursor: pointer;
+    font-size: 45px;
+    margin-right: 20px;
+}
+
+#camera-icon:hover {
+    filter: brightness(0.75);
+}
+
 #check:hover {
     color: #77dd77;
     cursor: pointer;
-}
-
-#description {
-    font-size: 16px;
-    margin: auto;
-    margin-bottom: 80px;
-    width: 90%;
 }
 
 #about, #demo, #intro, #metrics {
@@ -115,7 +126,16 @@ h1, .btn {
 
 #icons {
     margin-top: 10px;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
+}
+
+#image-bar {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    width: 80%;
 }
 
 #intro-img {
@@ -134,8 +154,8 @@ h1, .btn {
 }
 
 #result {
-    font-size    : 24px;
-    margin-bottom: 80px;
+    font-size    : 20px;
+    margin-bottom: 60px;
 }
 
 #snap {
@@ -161,10 +181,8 @@ h1, .btn {
 
 #upload {
     color: white;
-    margin-top: 20px;
     max-width: 500px;
     border-radius: 10px;
-    cursor: pointer;
     white-space: nowrap;
     overflow: hidden;
     padding-right: 10px;
@@ -175,6 +193,7 @@ h1, .btn {
     padding: 0.5em 0.75em;
     border: thin solid #212529;
     border-radius: 3px;
+    cursor: pointer;
     margin-right: 15px;
 }
 
@@ -189,13 +208,15 @@ h1, .btn {
     }
 }
 
-.navbar-collapse {
-    flex-grow: unset;
-}
-
-@media screen and (max-width: 800px) {
-    #error-rate {
-        margin-top: 20px;
+@media (max-width: 406px) {
+    #camera-icon {
+        margin-bottom: 30px;
+        margin-left: 20px;
     }
 }
 
+@media (max-width: 800px) {
+    .p2 {
+        margin-top: 20px;
+    }
+}
