@@ -5,20 +5,21 @@
 body {
     color      : white;
     font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    text-align: center;
+    text-align : center;
 }
 
-h1, .btn {
+h1,
+.btn {
     font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    width: 80%;
+    width      : 80%;
 }
 
 .btn {
     background-color: #64a19d;
-    color: white;
-    font-size: 80%;
-    height: 50px;
-    width: 150px;
+    color           : white;
+    font-size       : 80%;
+    height          : 50px;
+    width           : 150px;
 }
 
 .btn:hover {
@@ -33,21 +34,21 @@ h1, .btn {
 }
 
 .fa-regular {
-    font-size: 45px;
-    margin-left: 30px;
+    font-size   : 45px;
+    margin-left : 30px;
     margin-right: 30px;
 }
 
 .fade {
-    animation-duration: 0.5s;
+    animation-duration : 0.5s;
     animation-fill-mode: forwards;
-    animation-name: fade;
+    animation-name     : fade;
 }
 
 .metrics-description {
     margin-top: 20px;
-    max-width: 800px;
-    width: 80%;
+    max-width : 800px;
+    width     : 80%;
 }
 
 .navbar {
@@ -55,7 +56,8 @@ h1, .btn {
     width  : 100%;
 }
 
-.navbar-brand:hover, .nav-link:hover {
+.navbar-brand:hover,
+.nav-link:hover {
     filter: brightness(0.75);
 }
 
@@ -64,7 +66,7 @@ h1, .btn {
     width        : 400px;
 }
 
-.team-member > a > img {
+.team-member>a>img {
     border-radius: 10%;
     margin-bottom: 25px;
     margin-top   : 10px;
@@ -82,39 +84,42 @@ h1, .btn {
 }
 
 #check:hover {
-    color: #77dd77;
+    color : #77dd77;
     cursor: pointer;
 }
 
 #description {
-    font-size: 16px;
-    margin: auto;
+    font-size    : 16px;
+    margin       : auto;
     margin-bottom: 80px;
-    width: 90%;
+    width        : 90%;
 }
 
-#about, #demo, #intro, #metrics {
-    align-items: center;
-    display: flex;
+#about,
+#demo,
+#intro,
+#metrics {
+    align-items   : center;
+    display       : flex;
     flex-direction: column;
-    padding-top: 20px;
-    width: 100%;
+    padding-top   : 20px;
+    width         : 100%;
 }
 
 #drawing-canvas {
     border-radius: 30px;
-    margin: 30px;
-    width: 80%;
-    height: 35vh;
+    margin       : 30px;
+    width        : 80%;
+    height       : 350px;
 }
 
 #easy {
     max-width: 400px;
-    width: 64%;
+    width    : 64%;
 }
 
 #icons {
-    margin-top: 10px;
+    margin-top   : 10px;
     margin-bottom: 60px;
 }
 
@@ -128,9 +133,9 @@ h1, .btn {
 
 #model-img {
     margin-bottom: 40px;
-    margin-top: 40px;
-    max-width: 600px;
-    width: 80%;
+    margin-top   : 40px;
+    max-width    : 600px;
+    width        : 80%;
 }
 
 #result {
@@ -140,7 +145,7 @@ h1, .btn {
 
 #snap {
     max-width: 500px;
-    width: 80%;
+    width    : 80%;
 }
 
 #team {
@@ -150,32 +155,33 @@ h1, .btn {
 }
 
 #trash:hover {
-    color: #ff6961;
+    color : #ff6961;
     cursor: pointer;
 }
 
 #try {
     margin-bottom: 60px;
-    margin-top: 20px;
+    margin-top   : 20px;
 }
 
 #upload {
-    color: white;
-    margin-top: 20px;
-    max-width: 500px;
+    color        : white;
+    margin-top   : 20px;
+    max-width    : 500px;
     border-radius: 10px;
-    cursor: pointer;
-    white-space: nowrap;
-    overflow: hidden;
+    cursor       : pointer;
+    white-space  : nowrap;
+    overflow     : hidden;
     padding-right: 10px;
-    width: 80%;
+    width        : 80%;
 }
 
 #upload::file-selector-button {
-    padding: 0.5em 0.75em;
-    border: thin solid #212529;
+    padding      : 0.5em 0.75em;
+    border       : thin solid #212529;
     border-radius: 3px;
-    margin-right: 15px;
+    margin-right : 15px;
+    cursor       : pointer;
 }
 
 
@@ -198,4 +204,3 @@ h1, .btn {
         margin-top: 20px;
     }
 }
-

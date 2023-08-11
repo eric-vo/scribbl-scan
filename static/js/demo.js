@@ -58,19 +58,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
         image.onload = () => {
             clearCanvas(canvas, context);
-            const imageMaxSpacePercentage = 0.8;
-            let scale = 1;
-            isWidthOfImageLarger = image.width > image.height
-            if (isWidthOfImageLarger) {
-                const maxWidthImageCanOccupy = canvas.width * imageMaxSpacePercentage
-                scale = maxWidthImageCanOccupy / image.width;
-            } else {
-                const maxHeightImageCanOccupy = canvas.height * imageMaxSpacePercentage
-                scale = maxHeightImageCanOccupy / image.height;
+            // isWidthOfImageLarger = image.width > image.height
+            // if (isWidthOfImageLarger) {
+            //     const maxWidthImageCanOccupy = canvas.width * imageMaxSpacePercentage
+            //     scale = maxWidthImageCanOccupy / image.width;
+            // } else {
+            //     const maxHeightImageCanOccupy = canvas.height * imageMaxSpacePercentage
+            //     scale = maxHeightImageCanOccupy / image.height;
+            // }
+
+            // const widthOfImage = image.width * scale;
+            // const heightOfImage = image.height * scale;
+            function getPaddingFactor(aspectRatio) {
+                if (aspectRatio > 10) {
+                    return 0.9
+                } else if (aspectRatio > 5) {
+                    return 0.8
+                } else if (aspectRatio > 2) {
+                    return 0.6
+                } else {
+                    return 0.5
+                }
             }
 
-            // image.width *= scale;
-            // image.height *= scale;
+            const aspectRatio = image.width / image.height;
+            const paddingFactor = getPaddingFactor(aspectRatio);
+            let widthOfImage = canvas.width * paddingFactor;
+            let heightOfImage = canvas.height * paddingFactor;
+            if (aspectRatio > 1) {
+                heightOfImage = widthOfImage / aspectRatio;
+            } else {
+                widthOfImage = heightOfImage * aspectRatio;
+            }
 
             /* Draw the image on the canvas,
             centered and scaled to fit the canvas */
@@ -80,12 +99,12 @@ document.addEventListener('DOMContentLoaded', () => {
             //     (canvas.height - spaceAroundImage) / image.height * scaleMultiplier,
             // );
 
-            const x = (canvas.width / 2) - (image.width / 2) * scale;
-            const y = (canvas.height / 2) - (image.height / 2) * scale;
+            const x = (canvas.width - widthOfImage) / 2;
+            const y = (canvas.height - heightOfImage) / 2;
 
             // Put the image on the canvas
             context.drawImage(
-                image, x, y, image.width * scale, image.height * scale
+                image, x, y, widthOfImage, heightOfImage
             );
         };
     };
