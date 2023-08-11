@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
     clearFile(upload);
 
     window.onresize = () => {
+        // Only check for horizontal resizing
+        if (canvas.clientWidth === canvas.width) return;
+
         initializeCanvas(canvas, context);
         clearFile(upload);
     };
@@ -87,24 +90,26 @@ document.addEventListener('DOMContentLoaded', () => {
         camOn = false;
         webcam.stop();
 
-        const image_file = upload.files[0];
-        const image = new Image();
-        image.src = URL.createObjectURL(image_file);
+        setTimeout(() => {
+            const image_file = upload.files[0];
+            const image = new Image();
+            image.src = URL.createObjectURL(image_file);
 
-        image.onload = () => {
-            clearCanvas(canvas, context);
+            image.onload = () => {
+                clearCanvas(canvas, context);
 
-            const dimensions = resizeImageToCanvas(canvas, image);
+                const dimensions = resizeImageToCanvas(canvas, image);
 
-            // Put the image on the canvas
-            context.drawImage(
-                image,
-                dimensions.x,
-                dimensions.y,
-                dimensions.width,
-                dimensions.height,
-            );
-        };
+                // Put the image on the canvas
+                context.drawImage(
+                    image,
+                    dimensions.x,
+                    dimensions.y,
+                    dimensions.width,
+                    dimensions.height,
+                );
+            };
+        }, 20);
     };
 
     document.querySelector('#check').onclick = () => {

@@ -8,7 +8,7 @@
     <div class="fade" id="metrics">
         <h1>Technology & Metrics</h1>
         <div class="metrics-description">
-            Our model is based off of <a href="https://huggingface.co/microsoft/trocr-base-handwritten">Microsoft's TrOCR</a>,
+            Our model is based off of <a href="https://huggingface.co/microsoft/trocr-base-handwritten" target="_blank">Microsoft's TrOCR model</a>,
             an encoder-decoder model with a vision transformer encoder and a classic text transformer decoder.
         </div>
 
@@ -16,10 +16,12 @@
 
         <br><br>
         <div class="metrics-description" id="metrics-bottom">
-            We fine-tuned our model on the <a href="https://fki.tic.heia-fr.ch/databases/iam-handwriting-database">IAM Handwriting Database</a> to improve its performance on handwritten text.
+            We fine-tuned our model on the <a href="https://fki.tic.heia-fr.ch/databases/iam-handwriting-database" target="blank">IAM Handwriting Database</a> to improve its performance on handwritten text.
             <div class="p2">
                 With a training length of <strong>3 epochs</strong>,
-                we were able to reduce our character error rate to <strong>8.6%</strong>.
+                we were able to reduce our character error rate to <strong>8.6%</strong>,
+                our <a href="{{ url_for('static', filename='img/loss.png') }}" target="_blank">training loss</a> to <strong>0.29</strong>,
+                and our evaluation loss to <strong>0.8</strong>.
             </div>
         </div>
     </div>
