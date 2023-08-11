@@ -5,48 +5,61 @@
 {% endblock %}
 
 {% block body %}
-    <div class="fade" id="about">
+    <div class="fade primary-box">
         <h1>About Us</h1>
-        <p class="description">
+        <div class="description">
             ScribblScan bridges the gap between traditional and digital note-taking.
-            <br>
-            Made with ♥️ at <a href="https://www.ai-camp.org/" target="_blank">AI Camp</a>.
-        </p>
+            <div class="p2">
+                Made with ❤️ at <a href="https://www.ai-camp.org/" target="_blank">AI Camp</a>.
+            </div>
+        </div>
 
         <div id="team">
             <div class="team-member">
                 <h4>Alessia Ait-Azzouzene</h4>
-                <img src="{{ url_for('static', filename='alessia.png') }}">
+                <a href="https://github.com/ewyzzia" target="_blank">
+                    <img src="{{ url_for('static', filename='img/alessia.png') }}">
+                </a>
                 <p>Project Manager / Front-end Developer</p>
             </div>
 
             <div class="team-member">
                 <h4>Nicholas Evans</h4>
-                <img src="{{ url_for('static', filename='nick.png') }}">
+                <a href="https://github.com/REDPANDAS2105" target="_blank">
+                    <img src="{{ url_for('static', filename='img/nick.png') }}">
+                </a>
                 <p>Project Manager / Front-end Developer</p>
             </div>
 
             <div class="team-member">
                 <h4>Eric Vo</h4>
-                <img src="{{ url_for('static', filename='eric.png') }}">
+                <a href="https://github.com/eric-vo" target="_blank">
+                    <img src="{{ url_for('static', filename='img/eric.png') }}">
+                </a>
                 <p>Full-stack Developer</p>
             </div>
 
             <div class="team-member">
                 <h4>Seung-min Yu</h4>
-                <img src="{{ url_for('static', filename='ai-camp-logo.png') }}">
+                <a href="https://github.com/smyu24" target="_blank">
+                    <img src="{{ url_for('static', filename='img/seung.png') }}">
+                </a>
                 <p>Video Editor / Back-end Developer</p>
             </div>
 
             <div class="team-member">
                 <h4>Jasmine Kaur</h4>
-                <img src="{{ url_for('static', filename='jasmine.png') }}">
+                <a href="https://github.com/Jasminek25" target="_blank">
+                    <img src="{{ url_for('static', filename='img/jasmine.png') }}">
+                </a>
                 <p>Video Editor</p>
             </div>
 
             <div class="team-member">
                 <h4>Vignesh Prakash</h4>
-                <img src="{{ url_for('static', filename='vignesh.png') }}">
+                <a href="https://github.com/Pranomvignesh" target="_blank">
+                    <img src="{{ url_for('static', filename='img/vignesh.png') }}">
+                </a>
                 <p>Team Instructor / Mentor</p>
             </div>
         </div>

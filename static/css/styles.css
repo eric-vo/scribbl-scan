@@ -2,6 +2,11 @@
     border: 1px solid red;
 } */
 
+a {
+    /* Pastel blue */
+    color: #509fff;
+}
+
 body {
     color: white;
     font-family: "Nunito", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -11,6 +16,10 @@ body {
 h1, .btn {
     font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     width: 80%;
+}
+
+video {
+    display: none;
 }
 
 .btn {
@@ -28,7 +37,7 @@ h1, .btn {
 .description {
     font-size: 16px;
     margin: auto;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
     width: 90%;
 }
 
@@ -44,14 +53,26 @@ h1, .btn {
     animation-name: fade;
 }
 
+.metrics-description {
+    max-width: 800px;
+    width: 80%;
+}
+
 .navbar {
     padding: 25px;
     width: 100%;
 }
 
-.navbar-brand:hover,
-.nav-link:hover {
+.navbar-brand:hover, .nav-link:hover {
     filter: brightness(0.75);
+}
+
+.primary-box {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-top: 20px;
+    width: 100%;
 }
 
 .team-member {
@@ -59,21 +80,35 @@ h1, .btn {
     width: 400px;
 }
 
-.team-member>img {
+.team-member > a > img {
     border-radius: 10%;
     margin-bottom: 25px;
     margin-top: 10px;
     width: 150px;
 }
 
-.team-member>p {
+.team-member > p {
     margin-left: auto;
     margin-right: auto;
     width: 80%;
 }
 
+#bottom-description {
+    margin-bottom: 60px;
+}
+
 #brand {
     height: 45px;
+}
+
+#camera-icon {
+    cursor: pointer;
+    font-size: 45px;
+    margin-right: 20px;
+}
+
+#camera-icon:hover {
+    filter: brightness(0.75);
 }
 
 #check:hover {
@@ -81,28 +116,11 @@ h1, .btn {
     cursor: pointer;
 }
 
-#description {
-    font-size: 16px;
-    margin: auto;
-    margin-bottom: 60px;
-    width: 90%;
-}
-
-#about,
-#demo,
-#intro {
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-    padding-top: 10px;
-    width: 100%;
-}
-
 #drawing-canvas {
     border-radius: 30px;
     margin: 30px;
     width: 80%;
-    height: 35vh;
+    height: 350px;
 }
 
 #easy {
@@ -112,15 +130,35 @@ h1, .btn {
 
 #icons {
     margin-top: 10px;
-    margin-bottom: 60px;
+    margin-bottom: 50px;
+}
+
+#image-bar {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+    width: 80%;
 }
 
 #intro-img {
     margin-bottom: 40px;
 }
 
+#metrics-bottom {
+    margin-bottom: 60px;
+}
+
+#model-img {
+    margin-bottom: 60px;
+    margin-top: 60px;
+    max-width: 600px;
+    width: 80%;
+}
+
 #result {
-    font-size: 24px;
+    font-size: 20px;
     margin-bottom: 60px;
 }
 
@@ -133,10 +171,11 @@ h1, .btn {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-top: 10px;
 }
 
 #trash:hover {
-    color: #ff6961;
+    color : #ff6961;
     cursor: pointer;
 }
 
@@ -147,15 +186,22 @@ h1, .btn {
 
 #upload {
     color: white;
-    margin-top: 20px;
     max-width: 500px;
     border-radius: 10px;
-    cursor: pointer;
     white-space: nowrap;
     overflow: hidden;
     padding-right: 10px;
     width: 80%;
 }
+
+#upload::file-selector-button {
+    padding: 0.5em 0.75em;
+    border: thin solid #212529;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
 
 @keyframes fade {
     from {
@@ -167,9 +213,15 @@ h1, .btn {
     }
 }
 
-#upload::file-selector-button {
-    padding: 0.5em 0.75em;
-    border: thin solid #212529;
-    border-radius: 3px;
-    margin-right: 15px;
+@media (max-width: 406px) {
+    #camera-icon {
+        margin-bottom: 30px;
+        margin-left: 20px;
+    }
+}
+
+@media (max-width: 800px) {
+    .p2 {
+        margin-top: 20px;
+    }
 }

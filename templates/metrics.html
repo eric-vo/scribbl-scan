@@ -1,17 +1,28 @@
 {% extends 'layout.html' %}
 
 {% block head %}
-    <title>About Us</title>
+    <title>Tech & Metrics - ScribblScan</title>
 {% endblock %}
 
 {% block body %}
-    <div class="fade" id="demo">
-        <h1>Technology and Metrics</h1>
-        <div style="margin: 30px; max-width: 1000px;">
-            <p style="margin:30px;">Our model is based on Microsoft's TrOCR, an encoder-decoder model that uses a vision Transformer as an encoder and a classic text Transformer as a decoder. Using a text Transformer as a decoder allows TrOCR to leverage an understanding of natural language in its transcriptions.</p>
-            <img style="width:65%;height:auto;" alt="TrOCR architecture" src="https://huggingface.co/datasets/huggingface/documentation-images/resolve/main/trocr_architecture.jpg"></img>
-            <p style="margin:30px;">We fine-tuned TrOCR on the IAM Handwriting Database to improve its performance on handwritten text. By training for 3 epochs using HuggingFace's Transformers library, we were able to achieve a character error rate of <b>8.6%</b>, a training loss of <b>0.29</b>, and an evaluation loss of <b>0.8.</b></p>
-            <img style="width:65%;height:auto;" alt="Graph of Training Loss" src="{{ url_for('static', filename='training_loss_graph.png') }}">
+    <div class="fade primary-box">
+        <h1>Technology & Metrics</h1>
+        <div class="metrics-description">
+            Our model is based off of <a href="https://huggingface.co/microsoft/trocr-base-handwritten" target="_blank">Microsoft's TrOCR model</a>,
+            an encoder-decoder model with a vision transformer encoder and a classic text transformer decoder. Using a text Transformer as a decoder allows TrOCR to leverage an understanding of natural language in its transcriptions.
+        </div>
+
+        <img alt="TrOCR architecture" id="model-img" src="{{ url_for('static', filename='img/architecture.png') }}">
+
+        <br><br>
+        <div class="metrics-description" id="metrics-bottom">
+            We fine-tuned our model on the <a href="https://fki.tic.heia-fr.ch/databases/iam-handwriting-database" target="blank">IAM Handwriting Database</a> to improve its performance on handwritten text.
+            <div class="p2">
+                With a training length of <strong>3 epochs</strong>,
+                we were able to reduce our character error rate to <strong>8.6%</strong>,
+                our <a href="{{ url_for('static', filename='img/loss.png') }}" target="_blank">training loss</a> to <strong>0.29</strong>,
+                and our evaluation loss to <strong>0.8</strong>.
+            </div>
         </div>
     </div>
 {% endblock %}

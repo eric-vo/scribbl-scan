@@ -16,17 +16,17 @@
         <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
 
         <!-- ICONS -->
-        <link href="{{ url_for('static', filename='favicon.png') }}" rel="icon">
+        <link href="{{ url_for('static', filename='img/favicon.png') }}" rel="icon">
         <script crossorigin="anonymous" src="https://kit.fontawesome.com/2b9aead10a.js"></script>
 
         {% block head %}
         {% endblock %}
     </head>
     <body class="bg-black">
-        <nav class="bg-black fade navbar navbar-dark navbar-expand-sm">
+        <nav class="bg-black fade navbar navbar-dark navbar-expand-md">
             <div class="container-fluid">
                 <a class="navbar-brand" data-page="index" href="/">
-                    <img alt="ScribblScan" id="brand" src="{{ url_for('static', filename='logo.png') }}">
+                    <img alt="ScribblScan" id="brand" src="{{ url_for('static', filename='img/logo.png') }}">
                 </a>
 
                 <button aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" class="navbar-toggler" data-bs-target="#navbarNavAltMarkup" data-bs-toggle="collapse" type="button">
@@ -36,15 +36,15 @@
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         <a aria-current="page" class="nav-link" data-page="demo" href="/demo">
-                            <img alt="Demo" height="23" src="{{ url_for('static', filename='demo.png') }}">
-                        </a>
-
-                        <a aria-current="page" class="nav-link" data-page="about" href="/about">
-                            <img alt="About Us" height="23" src="{{ url_for('static', filename='about.png') }}">
+                            <img alt="Demo" height="23" src="{{ url_for('static', filename='img/demo.png') }}">
                         </a>
 
                         <a aria-current="page" class="nav-link" data-page="metrics" href="/metrics">
-                            <img alt="Metrics" height="23" src="{{ url_for('static', filename='about.png') }}">
+                            <img alt="Metrics" height="23" src="{{ url_for('static', filename='img/metrics.png') }}">
+                        </a>
+
+                        <a aria-current="page" class="nav-link" data-page="about" href="/about">
+                            <img alt="About Us" height="23" src="{{ url_for('static', filename='img/about.png') }}">
                         </a>
                     </div>
                 </div>
