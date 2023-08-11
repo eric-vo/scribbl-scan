@@ -150,15 +150,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 });
 
-function getMousePositionInCanvas(canvas, event) {
-    const {clientX, clientY} = event
-    const {left, top, width, height}  = canvas.getBoundingClientRect()
-    const scaleX = canvas.width / width
-    const scaleY = canvas.height / height
-
-    return {x: (clientX - left) * scaleX, y: (clientY - top) * scaleY}
-}
-
 function canvasToImage(canvas, context) {
     // Get image data from canvas
     const imageData = context.getImageData(
@@ -239,6 +230,15 @@ function fadeInHtml(element, html) {
     element.innerHTML = html;
 }
 
+function getMousePositionInCanvas(canvas, event) {
+    const {clientX, clientY} = event
+    const {left, top, width, height}  = canvas.getBoundingClientRect()
+    const scaleX = canvas.width / width
+    const scaleY = canvas.height / height
+
+    return {x: (clientX - left) * scaleX, y: (clientY - top) * scaleY}
+}
+
 function initializeCanvas(canvas, context) {
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
@@ -270,5 +270,5 @@ function resizeImageToCanvas(canvas, image) {
 }
 
 function updateLastCoordinates(x, y) {
-    lastCoordinates = { x: x, y: y }
+    lastCoordinates = {x: x, y: y}
 }
