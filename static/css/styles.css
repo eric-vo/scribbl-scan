@@ -13,6 +13,10 @@ body {
     text-align: center;
 }
 
+div > label {
+    margin-left: 5px;
+}
+
 h1, .btn {
     font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
     width: 80%;
@@ -65,6 +69,10 @@ video {
 
 .navbar-brand:hover, .nav-link:hover {
     filter: brightness(0.75);
+}
+
+.navbar-collapse {
+    flex-grow: unset;
 }
 
 .primary-box {
@@ -155,6 +163,10 @@ video {
     margin-top: 60px;
     max-width: 600px;
     width: 80%;
+}
+
+#multiple-lines {
+    margin-top: 30px;
 }
 
 #result {

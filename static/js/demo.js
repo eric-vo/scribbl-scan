@@ -1,7 +1,7 @@
 let isDrawing = false;
 let lastCoordinates;
 let camOn = false;
-const maxPaddingPx = 0; //35;
+const maxPaddingPx = 0; // 35;
 
 document.addEventListener('DOMContentLoaded', () => {
     // Set up the canvas
@@ -121,12 +121,15 @@ document.addEventListener('DOMContentLoaded', () => {
         fadeInHtml(result, 'Thinking...');
 
         // Convert the canvas to an image
-        const image = canvasToImage(canvas, context);
+        const imageUrl = canvasToImageUrl(canvas, context);
+
+        const multipleLinesCheckbox = document.querySelector('#multiple-lines');
 
         // Create a form with the image data
         const formData = new FormData();
-        formData.append('image', image.src);
-        console.log(image.src);
+        formData.append('image', imageUrl);
+        formData.append('multiple_lines', multipleLinesCheckbox.checked);
+        console.log(imageUrl);
 
         // Make an API call to the server
         fetch('/demo', {
@@ -150,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 });
 
-function canvasToImage(canvas, context) {
+function canvasToImageUrl(canvas, context) {
     // Get image data from canvas
     const imageData = context.getImageData(
         0, 0, canvas.width, canvas.height
@@ -192,12 +195,8 @@ function canvasToImage(canvas, context) {
     // Draw the cropped image on the temp canvas
     tempContext.drawImage(canvas, -leftEdge, 0);
 
-    // Convert the temp canvas to an image
-    const dataUrl = tempCanvas.toDataURL();
-    const image = new Image();
-    image.src = dataUrl;
-
-    return image;
+    // Convert the temp canvas to an image URL
+    return tempCanvas.toDataURL();
 }
 
 function clearCanvas(canvas, context) {
