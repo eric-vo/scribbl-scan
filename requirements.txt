@@ -2,3 +2,5 @@ Flask
 Pillow
 torch
 transformers
+opencv-python
+numpy

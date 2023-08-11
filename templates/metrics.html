@@ -9,7 +9,7 @@
         <h1>Technology & Metrics</h1>
         <div class="metrics-description">
             Our model is based off of <a href="https://huggingface.co/microsoft/trocr-base-handwritten" target="_blank">Microsoft's TrOCR model</a>,
-            an encoder-decoder model with a vision transformer encoder and a classic text transformer decoder.
+            an encoder-decoder model with a vision transformer encoder and a classic text transformer decoder. Using a text Transformer as a decoder allows TrOCR to leverage an understanding of natural language in its transcriptions.
         </div>
 
         <img alt="TrOCR architecture" id="model-img" src="{{ url_for('static', filename='img/architecture.png') }}">
