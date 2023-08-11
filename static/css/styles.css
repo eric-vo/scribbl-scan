@@ -154,13 +154,22 @@ video {
     margin-bottom: 40px;
 }
 
-#metrics-bottom {
+#loss-img {
+    border-radius: 15px;
     margin-bottom: 60px;
+    margin-top: 5px;
+    max-width: 600px;
+    width: 80%;
+}
+
+#metrics-bottom {
+    margin-bottom: 30px;
 }
 
 #model-img {
-    margin-bottom: 60px;
-    margin-top: 60px;
+    border-radius: 15px;
+    margin-bottom: 45px;
+    margin-top: 30px;
     max-width: 600px;
     width: 80%;
 }
@@ -193,7 +202,7 @@ video {
 
 #try {
     margin-bottom: 60px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
 #upload {
