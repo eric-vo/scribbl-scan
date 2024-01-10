@@ -1,6 +1,6 @@
 # ScribblScan
 #### Product Video: https://youtu.be/2Gj8fTZXtRg
-#### Demo Website (No multi-line recognition): https://scribblscan.2023-summer-computer-vision.repl.co
+#### Demo Website (No multi-line recognition): https://74ae8ab0-9bc3-4069-a18b-dadb3e82d520-00-367m6rt1t5dd5.teams.replit.dev/
 #### Description:
 ScribblScan makes switching from pen and paper to digital a breeze. Digitize notes with ease.
 #### How to Run:
